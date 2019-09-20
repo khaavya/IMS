@@ -55,7 +55,7 @@
             
             <apex:pageBlockSection columns="1" id="Brandpg" rendered="{!flagb}">
                 <apex:repeat value="{!brandlist}" var="b">
-                    <apex:pageBlockSection title="{!b.name}" collapsible="false">
+                    <apex:pageBlockSection title="{!b.name}" collapsible="false" columns="1">
                         <apex:pageBlockTable value="{!b.products__r}" var="pro" >
                             <apex:column headerValue="Name">
                                 <apex:outputText value="{!pro.name}"></apex:outputText>
@@ -83,9 +83,11 @@
                     <apex:pageBlockTable value="{!picklist}" var="p">
                         <apex:column value="{!p.name}" />
                         <apex:column value="{!p.Code_Barcode__c}"/>
+                         <apex:column value="{!p.Sub_Category__r.name}"/>
                         <apex:column value="{!p.Brand__r.name}"/>
                         <apex:column value="{!p.MRP__c}"/>
                         <apex:column value="{!p.Product_SKU__c}"/>
+                        
                         <apex:column >
                             <apex:commandLink value="View" action="{!productinfo1}">
                                 <apex:param value="{!p.id}" assignTo="{!productid}" name="productid"/>
@@ -130,9 +132,14 @@
             </apex:pageBlockTable>
             
         </apex:pageBlock>
+        
+                    
         <apex:pageBlock title="List of all Products" rendered="{!flagL}" >
             <apex:pageBlockSection >
+              
+              
                 <apex:pageBlock title="Click View "  >
+                     <div  style="overflow: scroll; height:500px;">
                     <apex:pageBlockTable value="{!pdt}" var="p">
                         <apex:column value="{!p.name}" />
                         <apex:column value="{!p.Code_Barcode__c}"/>
@@ -145,7 +152,9 @@
                             </apex:commandLink>
                         </apex:column>
                     </apex:pageBlockTable>
+                         </div>
                 </apex:pageBlock>
+                
                 <apex:pageBlock title=" Details of Product" rendered="{!flag2}">
                     <apex:pageBlockSection columns="2" >
                         <apex:outputField value="{!product1.name}"/>
@@ -165,6 +174,7 @@
                 
             </apex:pageBlockSection>
         </apex:pageBlock>
+            
         
     </apex:form>
 </apex:page>
